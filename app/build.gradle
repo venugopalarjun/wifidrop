@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'io.wifidrop'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'io.wifidrop'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // One fixed key so that a newer build installs over an older one.
+    signingConfigs {
+        shared {
+            storeFile file('../signing.jks')
+            storeType 'pkcs12'
+            storePassword 'wifidrop'
+            keyAlias 'wifidrop'
+            keyPassword 'wifidrop'
+        }
+    }
+    buildTypes {
+        debug { signingConfig signingConfigs.shared }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    lint { abortOnError false }
+}
